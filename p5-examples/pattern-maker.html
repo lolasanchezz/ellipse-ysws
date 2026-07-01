@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fractal Tree</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #000000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+  <script>
+
+
+/***
+██████╗  █████╗ ████████╗████████╗███████╗██████╗ ███╗   ██╗
+██╔══██╗██╔══██╗╚══██╔══╝╚══██╔══╝██╔════╝██╔══██╗████╗  ██║
+██████╔╝███████║   ██║      ██║   █████╗  ██████╔╝██╔██╗ ██║
+██╔═══╝ ██╔══██║   ██║      ██║   ██╔══╝  ██╔══██╗██║╚██╗██║
+██║     ██║  ██║   ██║      ██║   ███████╗██║  ██║██║ ╚████║
+╚═╝     ╚═╝  ╚═╝   ╚═╝      ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝
+███╗   ███╗ █████╗ ██╗  ██╗███████╗██████╗ 
+████╗ ████║██╔══██╗██║ ██╔╝██╔════╝██╔══██╗
+██╔████╔██║███████║█████╔╝ █████╗  ██████╔╝
+██║╚██╔╝██║██╔══██║██╔═██╗ ██╔══╝  ██╔══██╗
+██║ ╚═╝ ██║██║  ██║██║  ██╗███████╗██║  ██║
+╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
+***/
+/**
+This is a simple pattern creator that uses random numbers to generate wonderful patterns
+
+Click on the screen or press a key to see the next pattern (random)
+(The reason why I used mousePressed() instead of mouseClicked() is so that it would be mobile friendly(ish))
+
+The bulk of the program is contained in fuction createPattern()
+The parameters are:
+  fix => Instead of using a random number provide an angle for viewing
+  zoom => magnify the image (in or out) 
+          For zooming out use fractions (e.g. 0.5 or 0.2 etc.)
+          For zooming in use whole numbers (e.g. 2 or 5 etc.)
+  colour => Set a start colour for the HSL loop
+  
+  
+  The number at the top left represents the fix/step (use that as reference for 'saving' the pattern)
+  The number at the top right represents the startColour/colour (use that as reference for 'saving' the pattern)
+  
+  Have fun creating (or let the computer create) your own unique patterns!
+  ©️Josiah M.
+**/
+function setup() {
+  createCanvas(windowWidth,windowHeight);
+  angleMode(DEGREES); //Main unit used
+  colorMode(RGB); //To support the colour looping
+  s = createSlider(60,180,0,0.01);
+  s.position(0,20);
+  s.size(width-5,10)
+  //createPattern(s.value(),1,0); //A fixed pattern as demonstration of parameters (257,0.8,180)
+  createPattern(170,1,0); //A fixed pattern as demonstration of parameters (257,0.8,180)
+}
+function mousePressed(){
+  createPattern();
+}
+
+function keyPressed(){
+  createPattern();
+}
+
+function draw(){
+  //createPattern(s.value(),s.value()/100,0);
+  createPattern(s.value(),s.value()/100,0);
+  s.value(s.value()+0.01);
+}
+function createPattern (fix,zoom,startColour){
+  
+  var length = 0; //Length of line drawn
+  var step = round(random(360)); //Degree to turn
+  var colour = 0;//round(random(360)); //Start colour of HSL loop
+  
+  var rotationAngle = 0; //Actual angle relative to origin (derived from colour)
+  var magnify = height/500; //Decrease in length (will change overall size)
+
+  var oldX = width/2; //Original x coordinate for line
+  var oldY = height/2; //Original y coordinate for line
+  var newX; //New x coordinate for line
+  var newY; //New y coordinate for line
+  
+  //Set variables to parameters if available
+  if(fix != null){
+    step = fix;
+  }
+  if(zoom != null){
+    magnify = zoom;
+  }
+  if(startColour != null){
+    //colour = startColour;
+    colour = 0;
+  }
+  
+  background(255); //Clear the screen
+  
+  text("colour: "+colour,width-70,15); //Text for reference (colour)
+  
+  //Main pattern making loop
+  for(var i = 0;i<360;i++){
+    stroke(colour%360,100,50); //Colour from the HSL loop
+    
+    newX = length*(cos(rotationAngle))+oldX; //Calculate new x coordinate for line
+    newY = length*(sin(rotationAngle))+oldY; //Calculate new y coordinate for line
+    
+    line(oldX,oldY,newX,newY); //Draw line
+    
+    oldX = newX; //Set the original x coordinate to the curren  t x coordinate
+    oldY = newY; //Set the original y coordinate to the current y coordinate
+    rotationAngle += step; //Find the actual rotation
+    length -= magnify; //Decrease the length of line
+    //colour += 1; //Continue the HSL loop
+  }
+  
+  text("fix: "+step,10,15); //Text for reference (step)
+}
+
+ </script>
+</body>
+</html>

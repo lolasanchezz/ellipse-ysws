@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fractal Tree</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #000000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+  <script>
+    var animate = true;
+    var angle = 0;
+    var limit = 4;
+    var scrub = 0.01;
+    var animMult = 0.0002;
+    var sizeMult = 0.26;
+    var brLenRatio = 0.67;
+    var canvasSize = 600;
+
+    var slider;
+
+    function setup() {
+      createCanvas(canvasSize, canvasSize);
+      background(0);
+      slider = createSlider(0, TWO_PI, QUARTER_PI, scrub);
+    }
+
+    function draw() {
+      stroke(0);
+      strokeWeight(2);
+      background(255);
+      if (animate === true) {
+        angle = slider.value() + (millis() * animMult);
+      } else {
+        angle = slider.value();
+      }
+      translate(width / 2, height);
+      branch(height * sizeMult);
+    }
+
+    function branch(length) {
+      line(0, 0, 0, -length);
+      translate(0, -length);
+      push();
+      rotate(angle);
+      if (length > limit) {
+        branch(length * brLenRatio);
+      }
+      pop();
+      push();
+      rotate(-angle);
+      if (length > limit) {
+        branch(length * brLenRatio);
+      }
+      pop();
+    }
+  </script>
+</body>
+</html>

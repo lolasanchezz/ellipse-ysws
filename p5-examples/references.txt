@@ -1,0 +1,2 @@
+flowers = https://blog.jiang.pl/posts/s20/pixel-by-pixel/cyberflowers/
+spiral pattern = https://editor.p5js.org/ICantRemember/sketches/QqjpuLphA

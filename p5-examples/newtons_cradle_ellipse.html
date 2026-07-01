@@ -1,0 +1,126 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+  #nc-wrap { background: #fff; padding: 2rem 0 1rem; text-align: center; }
+  #nc-label { font-family: 'Share Tech Mono', monospace; font-size: 13px; color: #d45a8a; margin-top: 8px; letter-spacing: 0.05em; }
+</style>
+<div id="nc-wrap">
+  <canvas id="c" width="500" height="300" style="display:block;margin:0 auto;cursor:pointer;"></canvas>
+  <div id="nc-label">click to swing</div>
+</div>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+//const pink = '#d45a8a';
+const pink = '#000000';
+//const lightPink = '#f0b8ce';
+const lightPink = '#000000';
+const N = 5;
+const ballR = 20;
+const stringLen = 150;
+const pivotY = 55;
+const spacing = ballR * 2 + 2;
+const totalW = (N - 1) * spacing;
+const pivotX0 = (canvas.width - totalW) / 2;
+const g = 30;
+const dt = 1 / 30;
+const damping = 0.9995;
+
+const balls = Array.from({length: N}, (_, i) => ({
+  angle: i === 0 ? -Math.PI / 2.8 : 0,
+  omega: 0
+}));
+
+let swingRight = false;
+
+function pivotPos(i) { return { x: pivotX0 + i * spacing, y: pivotY }; }
+function ballPos(i) {
+  const p = pivotPos(i);
+  return { x: p.x + Math.sin(balls[i].angle) * stringLen, y: p.y + Math.cos(balls[i].angle) * stringLen };
+}
+
+function step() {
+  for (let i = 0; i < N; i++) {
+    balls[i].omega += -(g / stringLen) * Math.sin(balls[i].angle) * dt;
+    balls[i].omega *= damping;
+    balls[i].angle += balls[i].omega * dt;
+  }
+  const pos = balls.map((_, i) => ballPos(i));
+  for (let i = 0; i < N - 1; i++) {
+    if (Math.abs(pos[i+1].x - pos[i].x) < ballR * 2 - 1) {
+      const v1 = balls[i].omega, v2 = balls[i+1].omega;
+      balls[i].omega = v2; balls[i+1].omega = v1;
+    }
+  }
+}
+
+function drawDashedEllipse(cx, cy, rx, ry) {
+  ctx.save();
+  ctx.setLineDash([4, 4]);
+ // ctx.strokeStyle = pink;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const frameX = pivotX0 - ballR - 10;
+  const frameW = totalW + ballR * 2 + 20;
+
+  ctx.fillStyle = '#000000';
+   // ctx.fillStyle = '#e8c0d0';
+
+  ctx.fillRect(frameX, pivotY - 10, frameW, 4);
+  ctx.fillRect(frameX, pivotY - 22, 4, 14);
+  ctx.fillRect(frameX + frameW - 4, pivotY - 22, 4, 14);
+  for (let i = 0; i < N; i++) {
+    const p = pivotPos(i);
+    const b = ballPos(i);
+   // ctx.strokeStyle = lightPink;
+    ctx.lineWidth = 1;
+    ctx.setLineDash([]);
+    ctx.beginPath(); ctx.moveTo(p.x - 3, p.y); ctx.lineTo(b.x - 3, b.y); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(p.x + 3, p.y); ctx.lineTo(b.x + 3, b.y); ctx.stroke();
+
+    ctx.fillStyle = '#fff';
+   // ctx.strokeStyle = pink;
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([]);
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, ballR, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.strokeStyle = lightPink;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+   // ctx.arc(b.x - 5, b.y - 5, 6, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+
+  const cxEllipse = canvas.width / 2;
+  const cyEllipse = pivotY + stringLen + ballR + 30;
+  drawDashedEllipse(cxEllipse, cyEllipse, totalW / 2 + ballR + 20, 12);
+}
+
+function loop() { step(); draw(); requestAnimationFrame(loop); }
+
+canvas.addEventListener('click', () => {
+  if (!swingRight) {
+    balls[N-1].angle = Math.PI / 2.8; balls[N-1].omega = 0;
+    balls[0].angle = 0; balls[0].omega = 0;
+  } else {
+    balls[0].angle = -Math.PI / 2.8; balls[0].omega = 0;
+    balls[N-1].angle = 0; balls[N-1].omega = 0;
+  }
+  swingRight = !swingRight;
+});
+
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
