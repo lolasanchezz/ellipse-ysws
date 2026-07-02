@@ -19,8 +19,8 @@
 
 .cornerLeft {
   position: absolute;
-  bottom: -15%;
-  right: 25%;
+  bottom: -40%;
+  right: 20%;
   z-index: 0;
   display: flex;
   flex-direction: column;
