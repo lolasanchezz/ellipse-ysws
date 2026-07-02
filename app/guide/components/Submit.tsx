@@ -15,7 +15,7 @@ export default function Submit() {
         <p>generally, you should have a url where anyone can experience your finished project.</p>
         <p>- a screenshot of your art for the gallery!</p>
         <p>- a readme that talks about your project.</p>
-                <a href={"google.com"}>click here to submit</a>
+                <a href={"https://forms.hackclub.com/t/8vdYuJ8zYGus"}>click here to submit</a>
 
         </div>
         : <></>}
