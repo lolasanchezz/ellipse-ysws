@@ -39,7 +39,7 @@ export default function Header() {
             height={150}
             className={styles.swirl}
           />
-          <p>make a piece of generative art, <br></br>earn a prize for the time spent</p>
+          <p>make a piece of procedural art, <br></br>earn a prize for the time spent</p>
           <Image
             src="/flowers.png"
             alt="swirl"

@@ -1,0 +1,23 @@
+.main {
+  font-family: var(--font-orbit);
+  font-size: clamp(0.5rem, 2vw, 10vh);
+ display: flex;
+ flex-direction: column;
+ text-wrap-mode: wrap;
+justify-content: center;
+ padding: 2%;
+}
+
+.dropdown {
+    padding-left: 5%;
+}
+.main h1 {
+  font-family: var(--font-big-pixels);
+  font-size: clamp(1rem, 5vw, 20vh);
+}
+
+.button:hover {
+    color: blue;
+    cursor: pointer
+}
+

@@ -8,4 +8,10 @@ body {
   background: #fff;
   color: #111;
   min-height: 100vh;
+   font-family: var(--font-orbit);
+}
+
+h1 {
+  font-family: var(--font-big-pixels);
+  font-size: clamp(1rem, 5vw, 20vh);
 }

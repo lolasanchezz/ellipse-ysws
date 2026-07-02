@@ -1,0 +1,12 @@
+.cont {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    padding: 2%;
+}
+
+.back:hover {
+    color: blue;
+    cursor: crosshair;
+   font-size: medium;
+}

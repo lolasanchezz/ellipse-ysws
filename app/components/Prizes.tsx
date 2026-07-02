@@ -43,7 +43,7 @@ export default function Prizes() {
       <div className={styles.content}>
         <div className={styles.box}>
           <div className={styles.option}>
-            <span className={styles.hours}>3 hours</span>
+            <span className={styles.hours}>1 hour</span>
             <div className={styles.icon}>
               <a href={"https://store.steampowered.com/app/3401490/Replicube/"} className={styles.iconLink}>
               <Image
@@ -61,7 +61,7 @@ export default function Prizes() {
           <div className={styles.or}>or</div>
 
           <div className={styles.option}>
-            <span className={styles.hours}>6 hours</span>
+            <span className={styles.hours}>4 hours</span>
             <div className={styles.icon}>
               <Image
               src="/newtons-cradle.png"
