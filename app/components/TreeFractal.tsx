@@ -17,7 +17,7 @@ export default function TreeFractal() {
       if (!mounted || !containerRef.current || p5Ref.current) return
 
       p5Ref.current = new p5((s: any) => {
-        const canvasSize = 570
+        const canvasSize = 855
         const limit = 4
         const animMult = 0.0002
         const sizeMult = 0.26
@@ -36,7 +36,7 @@ export default function TreeFractal() {
         s.draw = () => {
           s.stroke('#d63884')
           s.strokeWeight(1.2)
-          s.background(255)
+          s.clear()
           const halfAngle = (slider.value() as number) * 0.5
           const waver = s.sin(s.millis() * 0.0006) * halfAngle * 0.3
           const angle = halfAngle + waver

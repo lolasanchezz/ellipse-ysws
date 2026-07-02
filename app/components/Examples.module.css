@@ -1,0 +1,40 @@
+.examples {
+  width: 100%;
+  padding: 0 2vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vh;
+  background: #fff;
+}
+
+.heading {
+  font-family: var(--font-big-pixels);
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  color: #111;
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  justify-content: safe center;
+  width: 100%;
+  gap: 3rem;
+  overflow-x: auto;
+  padding: 0 2vw 1rem;
+}
+
+.grid > * {
+  flex-shrink: 0;
+}
+
+.examples h3 {
+  font-family: var(--font-orbit);
+  font-size: clamp(0.8rem, 1vw, 5vh);
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}

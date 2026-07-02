@@ -1,3 +1,8 @@
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 .header {
   position: relative;
   width: 100%;
@@ -5,15 +10,17 @@
   overflow: hidden;
   background: #fff;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding-top: 12vh;
+  animation: fadeIn 1.2s ease-in forwards;
 }
 
 .cornerLeft {
   position: absolute;
-  top: -20%;
-  left: -525px;
+  bottom: -15%;
+  right: 1px;
   z-index: 0;
   display: flex;
   flex-direction: column;
@@ -23,8 +30,8 @@
 
 .cornerRight {
   position: absolute;
-  top: -90px;
-  right: -90px;
+  top: -20%;
+  right: -20%;
   z-index: 0;
   display: flex;
   flex-direction: column;
@@ -38,6 +45,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   bottom: 10%;
   gap: 10px;
 }
@@ -56,7 +64,7 @@
 
 .title {
   font-family: var(--font-big-pixels);
-  font-size: clamp(3.5rem, 9vw, 8rem);
+  font-size: clamp(5rem, 15vw, 50vh);
   color: #111;
   margin: 0;
   line-height: 1;
@@ -68,9 +76,37 @@
 
 .subtitle {
   font-family: var(--font-orbit);
-  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-size: clamp(1.8rem, 2vw, 1.2rem);
   color: #222;
   margin: 0;
+  text-align: center;
   letter-spacing: 0.1em;
   text-transform: lowercase;
+}
+
+
+
+
+
+.desc {
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: none;
+  flex-direction: row;
+  text-anchor: end;
+}
+
+.desc p {
+    font-family: var(--font-orbit);
+padding: 0% 2%;
+
+  text-align: center;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+.swirl2 {
+  transform: scaleX(-1);
 }

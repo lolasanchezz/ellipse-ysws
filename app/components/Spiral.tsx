@@ -26,22 +26,22 @@ export default function Spiral(props: {width: number}) {
           canvas.parent(containerRef.current!)
           s.angleMode(s.DEGREES)
           s.colorMode(s.RGB)
-          slider = s.createSlider(60, 180, 0, 0.01)
+          slider = s.createSlider(60, 120, 0, 0.005)
          // slider.parent(containerRef.current!)
           ;(slider.elt as HTMLInputElement).className = styles.slider
-          createPattern(170, 1, 0)
+          createPattern(170, 5, 0)
         }
 
         s.draw = () => {
           const step = slider.value() as number
           createPattern(step, step / 100, 0)
           if (increasing) {
-            slider.value(step + 0.01)
+            slider.value(step + 0.005)
             if (step == 120) {
               increasing = false
             }
           } else {
-            slider.value(step - 0.01)
+            slider.value(step - 0.005)
             if (step == 60) {
               increasing = true
             }
@@ -71,7 +71,7 @@ export default function Spiral(props: {width: number}) {
 
           s.background(255)
           
-          for (let i = 0; i < 360; i++) {
+          for (let i = 0; i < 500; i++) {
             s.stroke('#d63884')
             const newX = length * s.cos(rotationAngle) + oldX
             const newY = length * s.sin(rotationAngle) + oldY
