@@ -23,7 +23,8 @@ export default function Header() {
             height={60}
             className={styles.logo}
           />
-          <p className={styles.sponsored}>sponsored by lola @ hack club</p>
+          <p className={styles.sponsored}>made by lola @ hack club</p>
+          <p className={styles.sponsored}>ends 7/6/26 at 9am</p>
           <h1 className={styles.title}>ellipse</h1>
           <p className={styles.subtitle}>make art with math and code</p>
         </div>
