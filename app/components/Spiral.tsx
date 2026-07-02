@@ -5,7 +5,7 @@ import styles from './Spiral.module.css'
 
 export default function Spiral(props: {width: number}) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const p5Ref = useRef<import('p5') | null>(null)
+  const p5Ref = useRef<import('p5').default | null>(null)
 
   useEffect(() => {
     if (!containerRef.current) return
@@ -16,10 +16,10 @@ export default function Spiral(props: {width: number}) {
       const p5 = (await import('p5')).default
       if (!mounted || !containerRef.current || p5Ref.current) return
 
-      p5Ref.current = new p5((s: import('p5')) => {
+      p5Ref.current = new p5((s: import('p5').default) => {
         const canvasSize = props.width
         let increasing = true
-        let slider: import('p5').Element
+        let slider: import('p5').default.Element
 
         s.setup = () => {
           const canvas = s.createCanvas(canvasSize, canvasSize)
