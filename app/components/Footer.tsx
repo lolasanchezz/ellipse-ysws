@@ -11,6 +11,7 @@ export default function Footer() {
             <div className = {styles.text}>
                 <h1>ready to get started?</h1>
                 <p onClick = {() => {router.push('/guide')}}>check out the guide and submission here</p>
+                <p onClick = {() => {router.push('/gallery')}}>see what others have made in the gallery</p>
             </div>
             <Globe size={100}/>
         </div>
